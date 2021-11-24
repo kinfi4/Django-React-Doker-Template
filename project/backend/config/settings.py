@@ -56,8 +56,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-DATABASES = {
-    'default': {
+# The code here is just for me to make it easy
+# I highly recommend you to use special services for hosting your production database
+# like RDS from Amazon or something like that.
+
+# Here I just SqlLite for production version, because it's easy and simple
+
+if DEBUG:
+    default_database = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DATABASE_NAME', 'i love ira'),
         'USER': os.getenv('DATABASE_USER', 'net usera'),
@@ -65,7 +71,16 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_HOST', 'localhost'),
         'PORT': os.getenv('DATABASE_PORT', '5432')
     }
+else:
+    default_database = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'database.db'),
+    }
+
+DATABASES = {
+    'default': default_database
 }
+
 
 LOGGING = {
     'version': 1,
