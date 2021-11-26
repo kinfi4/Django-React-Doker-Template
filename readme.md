@@ -10,4 +10,27 @@ database yourself, my personal recommendation is to use RDS from AWS.
 
 In order to run this project on your own, you need just to have a docker installed and fill the .env files with your configurations.   
 
-Here s the list of commands to execute:
+-----------------------------------------------------------
+
+Here s the list of commands to execute for development:
+        
+    git clone https://github.com/kinfi4/Django-React-Doker-Template.git
+    cd Django-React-Doker-Template/project
+    
+    [ set your env variables in the project/backend/.env/.env.dev file ]
+
+    docker-compose -f docker-compose.dev.yml up --build
+    
+    [ after that you still need to make migrations for database and create a django-super-user ]
+
+    docker exec -it <BACKEND_CONTAINER_ID> bash
+    python manage.py migrate
+    python manage.py createsuperuser
+
+And that is it! Your app is ready to development!   
+PS: in order to get BACKEND_CONTAINER_ID type: "docker ps" and find container id for the backend.  
+
+---------------------------------------------------------
+
+
+    
